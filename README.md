@@ -55,7 +55,7 @@ http_port_t                    tcp      80, 81, 443, 488, 8008, 8009, 8443, 9000
 Add your streaming port using command:
 
 <code>
-semanage port -a -t http_port_t -p tcp <yourport>
+semanage port -a -t http_port_t -p tcp &lt;yourport&gt;
 </code>
 
 If you use a port that already exists in another policy and above command complains about it, change -a to -m in above command.
