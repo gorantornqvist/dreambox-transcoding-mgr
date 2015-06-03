@@ -18,13 +18,21 @@ SETUP INSTRUCTIONS:
 * Password protect the website, apache example:
 <code>
    <Directory "/var/www/vhosts/webtv.yourdomain.com">
+
       AuthType Basic
+      
       AuthName "Authentication Required"
+      
       AuthUserFile "/var/www/vhosts/data/webtv.yourdomain.com.htpasswd"
+      
       Require valid-user
+      
       Order allow,deny
+      
       Allow from all
+      
     </Directory>
+    
 </code>
 * Create the htpasswd file: htpasswd -c /var/www/vhosts/data/webtv.yourdomain.com.htpasswd yourusername yourpassword
 
@@ -33,14 +41,12 @@ SELINUX CONFIG:
 
 <code>
 getsebool -a | grep "httpd_can_network_connect "
-
 httpd_can_network_connect --> on
 </code>
 * Apache needs to be able to bind to the streaming ports you specify in config.php.
 
 <code>
 semanage port -l | grep '^http_port_t'
-
 http_port_t                    tcp      80, 81, 443, 488, 8008, 8009, 8443, 9000
 </code>
 
