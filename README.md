@@ -13,8 +13,18 @@ SETUP INSTRUCTIONS:
 * Create the directory "preview" in the same directory. It should have permissions that allow the webserver user to write to it.
 * Edit the global options in config.php and add your dreamboxes. Follow the instructions in the comments.
 * Create /etc/sysconfig/iptables according to iptables.config.sample - modify it and add your streaming ports.
-* Create /etc/cron.d/iptables-vlc-clients cronjob and make it run every minute. Point it to iptables-vlc-clients.sh.
-* Create /etc/cron.d/kill-vlc-sessions cronjob and make it run every 5 minute. Point it to kill-vlc-sessions.sh.
+* Create /etc/cron.d/iptables-vlc-clients cronjob and make it run every minute. Point it to iptables-vlc-clients.sh. Edit iptables-vlc-clients.sh for your needs.
+* Create /etc/cron.d/kill-vlc-sessions cronjob and make it run every 5 minute. Point it to kill-vlc-sessions.sh. Edit kill-vlc-sessions.sh for your needs.
+* Password protect the website, apache example:
+   <Directory "/var/www/vhosts/webtv.yourdomain.com">
+      AuthType Basic
+      AuthName "Authentication Required"
+      AuthUserFile "/var/www/vhosts/data/webtv.yourdomain.com.htpasswd"
+      Require valid-user
+      Order allow,deny
+      Allow from all
+    </Directory>
+* Create the htpasswd file: htpasswd -c /var/www/vhosts/data/webtv.yourdomain.com.htpasswd yourusername yourpassword
 
 SELINUX CONFIG:
 httpd_can_network_connect needs to be on, if not use setsebool to enable it.
