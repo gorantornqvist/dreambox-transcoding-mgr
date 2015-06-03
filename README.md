@@ -33,7 +33,6 @@ SETUP INSTRUCTIONS:
       Allow from all
       
     &lt;/Directory&gt;
-    
 </code>
 * Create the htpasswd file: htpasswd -c /var/www/vhosts/data/webtv.yourdomain.com.htpasswd yourusername yourpassword
 
