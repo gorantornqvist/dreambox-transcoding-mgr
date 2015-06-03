@@ -43,7 +43,7 @@ getsebool -a | grep "httpd_can_network_connect "
 
 httpd_can_network_connect --> on
 </code>
-* Apache needs to be able to bind to the streaming ports you specify in config.php.
+* Apache/vlc needs to be able to bind to the streaming ports you specify in config.php.
 
 <code>
 semanage port -l | grep '^http_port_t'
