@@ -17,6 +17,7 @@ SETUP INSTRUCTIONS:
 * Create /etc/cron.d/kill-vlc-sessions cronjob and make it run every 5 minute. Point it to kill-vlc-sessions.sh. Edit kill-vlc-sessions.sh for your needs.
 * Password protect the website, apache example:
 <code>
+
    &lt;Directory "/var/www/vhosts/webtv.yourdomain.com"&gt;
 
       AuthType Basic
