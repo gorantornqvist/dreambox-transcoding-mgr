@@ -1,12 +1,11 @@
-# dreambox-transcoding-mgr
-Dreambox Transcoding Manager
+# Dreambox Transcoding Manager
 
 A web based management tool written in PHP that allows you to start VLC transcoding streams on a linux box that streams the video from Enigma 1 and Enigma 2 dreamboxes in realtime. You can then access these streams from the internet using the VLC program and other video streaming clients.
 It has built-in handling for adding the remote IP address that you are connecting from to the local iptables config thus allowing it to connect to streaming ports.
 
-It´s been tested on CentOS 6 with selinux enabled using vlc 2.0.7 package from linuxtech repo and apache. Tested using both Enigma 1 and Enigma 2 dreamboxes.
+It´s been tested on CentOS 6 with selinux enabled using vlc 2.0.7 package from linuxtech repo and apache. Tested against both Enigma 1 and Enigma 2 dreamboxes.
 
-Feel free to report and issues you have with installing or using it ...
+Feel free to report any issues you have with installing or using it ...
 
 SETUP INSTRUCTIONS:
 * Copy index.php and config.php to the webroot of your linux box.
