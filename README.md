@@ -17,7 +17,7 @@ SETUP INSTRUCTIONS:
 * Create /etc/cron.d/kill-vlc-sessions cronjob and make it run every 5 minute. Point it to kill-vlc-sessions.sh. Edit kill-vlc-sessions.sh for your needs.
 * Password protect the website, apache example:
 <code>
-   <Directory "/var/www/vhosts/webtv.yourdomain.com">
+   &lt;Directory "/var/www/vhosts/webtv.yourdomain.com"&gt;
 
       AuthType Basic
       
@@ -31,7 +31,7 @@ SETUP INSTRUCTIONS:
       
       Allow from all
       
-    </Directory>
+    &lt;/Directory&gt;
     
 </code>
 * Create the htpasswd file: htpasswd -c /var/www/vhosts/data/webtv.yourdomain.com.htpasswd yourusername yourpassword
@@ -41,12 +41,14 @@ SELINUX CONFIG:
 
 <code>
 getsebool -a | grep "httpd_can_network_connect "
+
 httpd_can_network_connect --> on
 </code>
 * Apache needs to be able to bind to the streaming ports you specify in config.php.
 
 <code>
 semanage port -l | grep '^http_port_t'
+
 http_port_t                    tcp      80, 81, 443, 488, 8008, 8009, 8443, 9000
 </code>
 
