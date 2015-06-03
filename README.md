@@ -28,9 +28,10 @@ SETUP INSTRUCTIONS:
 
 SELINUX CONFIG:
 * httpd_can_network_connect needs to be on, if not use setsebool to enable it.
+<code>
 getsebool -a | grep "httpd_can_network_connect "
 httpd_can_network_connect --> on
-
+</code>
 * Apache needs to be able to bind to the streaming ports you specify in config.php.
 semanage port -l | grep '^http_port_t'
 http_port_t                    tcp      80, 81, 443, 488, 8008, 8009, 8443, 9000
