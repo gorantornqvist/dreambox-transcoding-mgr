@@ -39,14 +39,14 @@ quality['high'] = "vcodec=mp4v, vb=1024, acodec=mp4a, ab=128"
 
 [dreambox1]
 description = "Dreambox Bedroom"
-// Either 1 or 2
+; Either 1 or 2
 enigmaversion = 1
 ipaddress = "192.168.1.18"
-// Local port to use when transcoding
+; Local port to use when transcoding
 port = 12345
-// CPU Affinity - Which CPU ID the transcoding process should run on. 0 = First CPU
+; CPU Affinity - Which CPU ID the transcoding process should run on. 0 = First CPU
 cpu = 0
-// Only needed for Enigma v1 dreamboxes. Specifies the name of the User bouquet to use when listing channels
+; Only needed for Enigma v1 dreamboxes. Specifies the name of the User bouquet to use when listing channels
 bouquet = "Favoriter (TV)"
 
 [dreambox2]
@@ -55,7 +55,6 @@ enigmaversion = 1
 ipaddress = "192.168.1.19"
 port = 23456
 cpu = 1
-// Only for Enigma v1 dreamboxes. Specifies the name of the User bouquet to use when listing channels
 bouquet = "Favoriter (TV)"
 
 [dreambox3]
@@ -64,7 +63,7 @@ enigmaversion = 2
 ipaddress = "192.168.1.17"
 port = 8080
 cpu = 2
-// This is our main dreambox so only the users "me" and "mywife" is allowed to operate it
+; This is our main dreambox so only the users "me" and "mywife" is allowed to operate it
 operators[] = "me"
 operators[] = "mywife"
 
