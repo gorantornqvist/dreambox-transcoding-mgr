@@ -1,0 +1,13 @@
+#!/bin/sh
+# kill-vlc-sessions.sh
+# Sample shell script for killing vlc processes that started more than X minutes ago, based on the age of the pid files.
+# It echoes when it kills a process to the logfile /var/www/vhosts/data/webtv.log
+# Add something like this to /etc/cron.d/kill-vlc-sessions
+# */5 * * * * root /usr/local/bin/kill-vlc-sessions.sh >/dev/null 2>&1
+
+for pidfile in $(find /var/www/vhosts/data/*.pid -mmin +120); do
+  pid=$(cat $pidfile)
+  kill -9 $pid
+  rm -f $pidfile
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Start was more than 120 minutes ago for transcode process with pid $pid, killing it ..." >>/var/www/vhosts/data/webtv.log
+done
