@@ -89,6 +89,13 @@ $webaddress = $config['global']['webaddress'];
 
 $applog=$config['global']['datadir'] . "/" . $config['global']['logfilename'];
 
+# The IP address we use for adding to the vlcclientsfile
+if ($config['global']['reverse_proxy_mode'] == 'true') {
+        $remotehost = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+        $remotehost = $_SERVER['REMOTE_ADDR'];
+}
+
 # Get/set username session variable
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   if (!isset($_SERVER["REMOTE_USER"]) || empty($_SERVER["REMOTE_USER"])) {
