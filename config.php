@@ -19,6 +19,10 @@ datadir = "/var/www/vhosts/data"
 ; Logfile for Dreambox Transcoding Manager events - stored in datadir
 logfilename = "webtv.log" 
 
+; In reverse proxy mode we use HTTP_X_FORWARDED_FOR header instead of REMOTE_ADDR
+; Make sure your reverse proxy config passes this header if you use it
+reverse_proxy_mode = "false"
+
 ; Absolute path to taskset program
 taskset = /bin/taskset
 
