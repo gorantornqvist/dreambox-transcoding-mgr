@@ -13,18 +13,11 @@ webaddress = "webtv.yourdomain.com"
 
 ; Directory to store logfiles and data files
 ; Make sure the webserver user has write access to it
+; It will create a log file and a pid file for each dreambox
 datadir = "/var/www/vhosts/data"
 
 ; Logfile for Dreambox Transcoding Manager events - stored in datadir
 logfilename = "webtv.log" 
-
-; The file we use to store IP addresses allowed to access the transcoding ports
-; Make sure the webserver user owns it
-clientsfile = "/var/www/vhosts/data/iptables-vlc-clients"
-
-; In reverse proxy mode we use HTTP_X_FORWARDED_FOR header instead of REMOTE_ADDR
-; Make sure your reverse proxy config passes this header if you use it
-reverse_proxy_mode = "false"
 
 ; Absolute path to taskset program
 taskset = /bin/taskset
@@ -61,7 +54,7 @@ bouquet = "Favoriter (TV)"
 description = "Dreambox Livingroom"
 enigmaversion = 2
 ipaddress = "192.168.1.17"
-port = 8080
+port = 34567
 cpu = 2
 ; This is our main dreambox so only the users "me" and "mywife" is allowed to operate it
 operators[] = "me"
