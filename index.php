@@ -86,10 +86,12 @@ function dreamboxGetChannel($version, $ip) {
 
 $title = $config['global']['title'];
 $webaddress = $config['global']['webaddress'];
+$browser = get_browser(null, true);
+$browsername = $browser['browser'];
 
 $applog=$config['global']['datadir'] . "/" . $config['global']['logfilename'];
 
-# The IP address we use for adding to the vlcclientsfile
+# The Remote IP address of the user connecting
 if ($config['global']['reverse_proxy_mode'] == 'true') {
         $remotehost = $_SERVER['HTTP_X_FORWARDED_FOR'];
 } else {
@@ -104,7 +106,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     $_SESSION['username'] = $_SERVER["REMOTE_USER"];
   }
   $now=date('Y-m-d H:i:s');
-  logger($applog, "$now - Logon by " . $_SESSION['username'] . " from $remotehost\n");
+  logger($applog, "$now - Logon by " . $_SESSION['username'] . " from $remotehost using $browsername.\n");
 }
 $username = $_SESSION['username'];
 
@@ -116,6 +118,8 @@ switch ((isset($_GET['action']) ? $_GET['action'] : '')) {
       if (array_key_exists($box, $config)) {
         $ipaddress=$config[$box]['ipaddress'];
         $port=$config[$box]['port'];
+        $description=$config[$box]['description'];
+        logger($applog, "$now - User " . $_SESSION['username'] . " from $remotehost started streaming from $description.\n");
         header("Content-Type: application/octet-stream");
         $fd = fopen("http://localhost:$port/",'r');
         fpassthru($fd);
