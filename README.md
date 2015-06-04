@@ -33,6 +33,8 @@ SETUP INSTRUCTIONS:
     &lt;/Directory&gt;
 </code>
 * Create the htpasswd file: htpasswd -c /var/www/vhosts/data/webtv.yourdomain.com.htpasswd yourusername yourpassword
+* Configure browscap.ini , wget -O /etc/browscap.ini http://browscap.org/stream?q=PHP_BrowsCapINI
+* Edit /etc/php.ini , add browscap = /etc/browscap.ini
 
 SELINUX CONFIG:
 * httpd_can_network_connect needs to be on, if not use setsebool to enable it.
