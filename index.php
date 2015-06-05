@@ -15,7 +15,6 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -121,8 +120,10 @@ switch ((isset($_GET['action']) ? $_GET['action'] : '')) {
         $description=$config[$box]['description'];
         logger($applog, "$now - User " . $_SESSION['username'] . " from $remotehost started streaming from $description.\n");
         header("Content-Type: application/octet-stream");
-        $fd = fopen("http://localhost:$port/",'r');
-        fpassthru($fd);
+        $fd = @fopen("http://localhost:$port/",'r');
+        if ($fd != FALSE) {
+          fpassthru($fd);
+        }
         exit;
       }
     }
@@ -146,7 +147,7 @@ switch ((isset($_GET['action']) ? $_GET['action'] : '')) {
       $dreambox = $_POST['dreambox'];
       if (!is_array($config[$dreambox])) {
         $_SESSION['alertmessage'] = "Invalid dreambox!";
-        header("Location: index.php");
+        header("Location: " . $_SERVER['SCRIPT_NAME']);
         exit;
       }
       $logfile = $config['global']['datadir'] . "/" . $config[$dreambox]['ipaddress'] . ".log";
@@ -160,7 +161,7 @@ switch ((isset($_GET['action']) ? $_GET['action'] : '')) {
       }
       if (!dreamboxChangeChannel($config[$dreambox]['enigmaversion'], $config[$dreambox]['ipaddress'], $channel)) {
         $_SESSION['alertmessage'] = "Could not change channel on dreambox, verify that it is up!";
-        header("Location: index.php");
+        header("Location: " . $_SERVER['SCRIPT_NAME']);
         exit;
       }
       if ($config[$dreambox]['enigmaversion'] == '1') {
@@ -170,7 +171,7 @@ switch ((isset($_GET['action']) ? $_GET['action'] : '')) {
         $dreamboxurl = "http://" . $config[$dreambox]['ipaddress'] . ":8001/" . urlencode($channel);
       }
       $transcodeoptions = $config['global']['quality'][$quality];
-      $cmd = $config['global']['taskset'] . " -c 0 " . $config['global']['vlc'] . " -v -I dummy --http-reconnect $dreamboxurl --sout='#transcode{" . $transcodeoptions . "}:standard{access=http,mux=ts,dst=:$port}' --sout-mux-caching=5000 >$logfile 2>$logfile & printf \"%u\" $!";
+      $cmd = $config['global']['taskset'] . " -c " . $config[$dreambox]['cpu'] . " " . $config['global']['vlc'] . " -v -I dummy --http-reconnect $dreamboxurl --sout='#transcode{" . $transcodeoptions . "}:standard{access=http,mux=ts,dst=:$port}' --sout-mux-caching=5000 >$logfile 2>$logfile & printf \"%u\" $!";
       $pid = system($cmd, $retval);
       if (is_numeric($pid) && intval($pid) > 0) {
         sleep(1);
@@ -187,7 +188,7 @@ switch ((isset($_GET['action']) ? $_GET['action'] : '')) {
       } else {
         $_SESSION['alertmessage'] = "Transcoding process could not be started. Check logfile $logfile ...";
       }
-      header("Location: index.php");
+      header("Location: " . $_SERVER['SCRIPT_NAME']);
       exit;
       break;
 }
